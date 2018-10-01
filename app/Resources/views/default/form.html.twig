@@ -1,0 +1,32 @@
+<header>
+    <h1></h1>
+</header>
+<article>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>GitHub Resume</h4>
+                </div>
+                <div class="panel-body">
+                    <form method="get">
+                        {% if profile is defined %}
+                          <div class="alert alert-danger" role="alert">Profile not found</div>
+                        {% endif %}
+                        <div class="form-group col-md-10">
+                          <input type="text" class="form-control input-lg" name="username" required placeholder="Enter your GitHub username and click on generate">
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary">Generate</button>
+                        <div class="form-group col-md-10">
+                            <input type="radio" name="theme" id="theme1" checked value="1">
+                            <label for="theme1">Theme 1</label>
+                            &nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="theme" id="theme2" value="2">
+                            <label for="theme2">Theme 2</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

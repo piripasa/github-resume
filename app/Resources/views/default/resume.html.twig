@@ -1,0 +1,152 @@
+<div class="col-md-8 col-md-offset-2">
+<header>
+    <a href="/"><< Back</a>
+    <h1>{{ profile.name }}</h1>
+    <hr/>
+</header>
+<article>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Github Profile</h4>
+        </div>
+        <div class="col-md-10">
+            <p class="enlarge">
+                On GitHub since {{ profile.created_at | date('Y') }}, <a
+                        href="{{ profile.html_url }}">{{ profile.name }}</a> is a developer
+
+                based in <span class="adr locality">{{ profile.location }}</span>
+                with <a href="{{ profile.html_url }}?tab=repositories">{{ profile.public_repos }} public
+                    repositories</a>&nbsp;and <a href="{{ profile.html_url }}/followers">{{ profile.followers }}
+                    followers</a>.
+            </p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Website</h4>
+        </div>
+        <div class="col-md-10">
+            <a href="{{ profile.blog != profile.login ? profile.blog : profile.html_url }}">{{ profile.blog }}</a>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Languages</h4>
+        </div>
+        <div class="col-md-10">
+            {% if languages[0] | length > 0 %}
+            <ul class="language">
+                {% for key, value in languages[0] %}
+                    <li>
+                        <a href="https://github.com/search?q=user%3A{{ profile.login }}&amp;l={{ key }}">
+                            {% if key|length %} {{ key }} {% else %} Other {% endif %}
+                        </a>
+                        ({{ (value * 100 / languages[1]) | round }}%)
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <h4>No Languages found</h4>
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Repositories</h4>
+        </div>
+        <div class="col-md-10">
+            {% if repositories | length > 0 %}
+                {% for repository in repositories %}
+                    <div class="repository">
+                        <h4>
+                            <a class="pull-left" href="{{ repository.html_url }}">{{ repository.name }}</a>
+                            <span class="pull-right">{{ repository.created_at | date('Y') }} – {{ repository.updated_at | date('Y') }}</span>
+                        </h4>
+                        <div class="clearfix"></div>
+                        <h5>{{ repository.language }}</h5>
+                        <p>{{ repository.description }} <a href="{{ repository.homepage }}">{{ repository.homepage }}</a>
+                        </p>
+                        <p>
+                            This repository has {{ repository.stargazers_count }} stars and {{ repository.forks_count }}
+                            forks.
+                            Visit <a href="{{ repository.html_url }}">the repo</a> on GitHub.
+                        </p>
+                    </div>
+                    <hr/>
+                {% endfor %}
+
+            {% else %}
+                <h4>No Repositories found</h4>
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Contributions</h4>
+        </div>
+        <div class="col-md-10">
+            {% if contributions | length > 0 %}
+                {% for contribution in contributions %}
+                    <div class="contributions">
+                      <h4>
+                        <a href="{{contribution.repository_url}}">{{contribution.repository_name}}</a>
+                      </h4>
+                      <p>{{contribution.username}} has contributed for <a href="{{contribution.repository_url}}">{{contribution.repository_name}}</a> with <a href="{{contribution.commits_url}}">{{contribution.count}} commit(s)</a></p>
+                    </div>
+                    <hr/>
+                {% endfor %}
+            {% else %}
+                <h4>No Contributions found</h4>
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Organizations</h4>
+        </div>
+        <div class="col-md-10">
+            {% if organizations | length > 0 %}
+                {% for organization in organizations %}
+                    <div class="organization">
+                        <h4>{{ organization.login }}</h4>
+                        <h5>Member</h5>
+                        <p>{{ organization.description }}, please visit <a
+                                    href="https://github.com/{{ organization.login }}">the organization page</a> on GitHub.
+                        </p>
+                    </div>
+                    <hr/>
+                {% endfor %}
+            {% else %}
+                <h4>No Organizations found</h4>
+            {% endif %}
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-2">
+            <h4>Favourites</h4>
+        </div>
+        <div class="col-md-10">
+            {% if favourites | length > 0 %}
+                {% for favourite in favourites %}
+                    <div class="favourite">
+                        <h4>
+                            <a href="{{ favourite.html_url }}">{{ favourite.full_name }}</a>
+                        </h4>
+                        <p>{{ favourite.description }}</p>
+                    </div>
+                    <hr/>
+                {% endfor %}
+            {% else %}
+                <h4>No Favourites found</h4>
+            {% endif %}
+        </div>
+    </div>
+
+</article>
+</div>

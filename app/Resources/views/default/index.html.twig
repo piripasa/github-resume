@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    {% if profile.name is defined %}
+        {% include 'default/resume.html.twig' %}
+    {% else %}
+        {% include 'default/form.html.twig' %}
+    {% endif %}
+
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+</style>
+{% endblock %}
